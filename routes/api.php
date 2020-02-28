@@ -24,21 +24,28 @@ Route::put('/card/{id}/active', function ($id) {
     $card->status = 'active';
     $card->save();
     return new CardResource($card);
-})->middleware("cors");
+});
 
 Route::put('/card/{id}/deactive', function ($id) {
     $card = Card::findOrFail((int)$id);
     $card->status = 'deactive';
     $card->save();
     return new CardResource($card);
-})->middleware("cors");
+});
 
 Route::put('/card/{id}/hire', function ($id) {
     $card = Card::findOrFail((int)$id);
     $card->status = 'active';
     $card->save();
     return new CardResource($card);
-})->middleware("cors");
+});
+
+Route::put('/card/{id}/uncontract', function ($id) {
+    $card = Card::findOrFail((int)$id);
+    $card->status = 'hire';
+    $card->save();
+    return new CardResource($card);
+});
 
 /* Route::get('/info', function () {
     return phpinfo();

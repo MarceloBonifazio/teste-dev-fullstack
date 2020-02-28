@@ -1,69 +1,203 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import uuid from 'uuid/v4';
 
+import Button from '@material-ui/core/Button';
+import CardMedia from '@material-ui/core/CardMedia';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
-import Card from '../Card';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+
+import { currency } from '../../utils';
+
+import Dialog from '../Dialog';
 
 import useStyles from './styles';
+import useCore, { StyledButton } from '../../styles';
+
+import {
+  Icon1,
+  Icon2,
+  Icon3,
+  Icon4,
+  Icon5,
+  Icon6,
+  Icon7,
+  Icon8,
+} from '../../svg';
 
 const List = () => {
+  const core = useCore();
   const styles = useStyles();
 
   const [state, setState] = useState({
-    data: [],
+    data: {},
+    loading: false,
     error: false,
-    loading: true,
-    person: '',
-    fieldError: false,
   });
 
+  const {
+    title,
+    color: backgroundColor,
+    type,
+    icon,
+    amount,
+    about,
+    id,
+    status,
+  } = state.data;
+
   useEffect(() => {
-    async function fetchApi() {
-      const baseUrl = 'http://localhost:8000/api/cards';
-      try {
-        const {
-          data: { data },
-        } = await axios.get(baseUrl);
-        setState({ ...state, data, loading: false });
-      } catch (err) {
-        setState({ ...state, error: true, loading: false });
+    async function fetchLS() {
+      const data = JSON.parse(localStorage.getItem('item'));
+      if (!data) {
+        window.location.href = '/';
       }
+      setState({ data });
     }
-    fetchApi();
+
+    fetchLS();
     // eslint-disable-next-line
   }, []);
 
-  if (state.loading) {
-    return (
-      <Container className={styles.root}>
-        Carregando...
-        <LinearProgress />
-      </Container>
-    );
-  }
+  const backgroundTitleColor = {
+    performance: '#4472c4',
+    engagement: '#7030a0',
+    culture: '#548235',
+    relations: '#c55a11',
+  };
 
-  if (state.error) {
-    return (
-      <Container className={styles.root}>
-        <Paper className={styles.error}>Erro ao pesquisar dados</Paper>
-      </Container>
-    );
-  }
+  const iconMap = {
+    icon1: <Icon1 classes={core.iconColor} />,
+    icon2: <Icon2 classes={core.iconColor} />,
+    icon3: <Icon3 classes={core.iconColor} />,
+    icon4: <Icon4 classes={core.iconColor} />,
+    icon5: <Icon5 classes={core.iconColor} />,
+    icon6: <Icon6 classes={core.iconColor} />,
+    icon7: <Icon7 classes={core.iconColor} />,
+    icon8: <Icon8 classes={core.iconColor} />,
+  };
+
+  const titleMap = {
+    performance: 'Performance',
+    engagement: 'Engajamento',
+    culture: 'Cultura',
+    relations: 'Relações',
+  };
+
+  const action = async typeStatus => {
+    setState({ ...state, error: false, loading: true });
+    try {
+      const {
+        data: { data },
+      } = await axios.put(`/api/card/${id}/${typeStatus}`);
+      setState({ ...state, data, loading: false });
+    } catch (err) {
+      setState({ ...state, error: true, loading: false });
+    }
+  };
+
+  const buttonMap = {
+    active: (
+      <Button
+        variant="contained"
+        color="secondary"
+        className={core.button}
+        onClick={() => action('deactive')}
+      >
+        Desativar
+      </Button>
+    ),
+    deactive: (
+      <Button
+        variant="contained"
+        color="primary"
+        className={core.button}
+        onClick={() => action('active')}
+      >
+        Ativar
+      </Button>
+    ),
+    hire: (
+      <StyledButton
+        variant="contained"
+        color="primary"
+        className={core.button}
+        onClick={() => action('hire')}
+      >
+        Contratar e ativar módulo
+      </StyledButton>
+    ),
+  };
+
+  const back = () => {
+    localStorage.removeItem('item');
+    window.location.href = '/';
+  };
 
   return (
-    <Container className={styles.root}>
-      <Grid className={styles.container} container spacing={1}>
-        {state.data.map(item => (
-          <Grid item xs={12} sm={4} md={3}>
-            <Card item={item} />
+    <Container className={core.container}>
+      <Dialog show={state.loading} />
+      <IconButton onClick={back}>
+        <ArrowBack />
+        <Typography variant="h5">Voltar</Typography>
+      </IconButton>
+      <Paper elevation={2} className={styles.item}>
+        <Typography variant="h1" className={styles.title}>
+          Contratar módulo
+        </Typography>
+        <Grid container spacing={3}>
+          {state.error && (
+            <Grid item xs={12}>
+              <Paper className={core.error}>Erro ao salvar dados</Paper>
+            </Grid>
+          )}
+          <Grid item sm={2}>
+            <CardMedia
+              style={{ backgroundColor: backgroundTitleColor[type] }}
+              className={core.cardTitleStyle}
+            >
+              {titleMap[type]}
+            </CardMedia>
+            <CardMedia
+              style={{ backgroundColor }}
+              className={core.cardIconStyle}
+            >
+              {iconMap[icon]}
+            </CardMedia>
           </Grid>
-        ))}
-      </Grid>
+          <Grid item sm={5}>
+            <Typography variant="h6" component="p">
+              {title}
+            </Typography>
+            <Typography variant="body2" className={styles.margin}>
+              {amount !== null
+                ? `+ ${currency(amount)} por colaborador por mês`
+                : 'Gratuito'}
+            </Typography>
+            {buttonMap[status]}
+            {['active', 'deactive'].includes(status) && (
+              <Button
+                variant="outlined"
+                color="secondary"
+                className={`${core.button} ${styles.uncontract}`}
+                onClick={() => action('uncontract')}
+              >
+                Descontratar módulo
+              </Button>
+            )}
+          </Grid>
+          <Grid item sm={12}>
+            <Typography variant="h2" className={styles.titleAbout}>
+              Sobre o módulo
+            </Typography>
+            {about}
+          </Grid>
+        </Grid>
+      </Paper>
     </Container>
   );
 };

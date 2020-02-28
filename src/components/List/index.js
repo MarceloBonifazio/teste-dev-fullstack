@@ -8,29 +8,27 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Paper from '@material-ui/core/Paper';
 
 import Card from '../Card';
+import Dialog from '../Dialog';
 
-import useStyles from './styles';
+import useCore from '../../styles';
 
 const List = () => {
-  const styles = useStyles();
+  const core = useCore();
 
   const [state, setState] = useState({
     data: [],
     error: false,
     loading: true,
     putError: false,
-    putLoading: true,
-    person: '',
-    fieldError: false,
+    putLoading: false,
   });
 
   useEffect(() => {
     async function fetchApi() {
-      const baseUrl = 'http://localhost:8000';
       try {
         const {
           data: { data },
-        } = await axios.get(`${baseUrl}/api/cards`);
+        } = await axios.get('/api/cards');
         setState({ ...state, data, loading: false });
       } catch (err) {
         setState({ ...state, error: true, loading: false });
@@ -40,15 +38,25 @@ const List = () => {
     // eslint-disable-next-line
   }, []);
 
+  const changeData = (data, item, id) => {
+    if (item.id === id) {
+      return data;
+    } else {
+      return item;
+    }
+  };
+
   const action = async (type, id) => {
-    setState({ ...state, putLoading: true });
-    const baseUrl = 'http://localhost:8000';
+    setState({ ...state, putError: false, putLoading: true });
     try {
       const {
         data: { data },
-      } = await axios.put(`${baseUrl}/api/card/${id}/${type}`);
-      console.log(data, type, id);
-      // setState({ ...state, data, putLoading: false });
+      } = await axios.put(`/api/card/${id}/${type}`);
+      setState({
+        ...state,
+        data: state.data.map(item => changeData(data, item, id)),
+        putLoading: false,
+      });
     } catch (err) {
       setState({ ...state, putError: true, putLoading: false });
     }
@@ -56,7 +64,7 @@ const List = () => {
 
   if (state.loading) {
     return (
-      <Container className={styles.root}>
+      <Container className={core.container}>
         Carregando...
         <LinearProgress />
       </Container>
@@ -65,15 +73,21 @@ const List = () => {
 
   if (state.error) {
     return (
-      <Container className={styles.root}>
-        <Paper className={styles.error}>Erro ao pesquisar dados</Paper>
+      <Container className={core.container}>
+        <Paper className={core.error}>Erro ao pesquisar dados</Paper>
       </Container>
     );
   }
 
   return (
-    <Container className={styles.root}>
-      <Grid className={styles.container} container spacing={1}>
+    <Container className={core.container}>
+      <Grid container spacing={1}>
+        <Dialog show={state.putLoading} />
+        {state.putError && (
+          <Grid item xs={12}>
+            <Paper className={core.error}>Erro ao salvar dados</Paper>
+          </Grid>
+        )}
         {state.data.map(item => (
           <Grid item xs={12} sm={4} md={3} key={uuid()}>
             <Card item={item} action={action} />

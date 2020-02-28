@@ -1,23 +1,25 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    marginTop: 16,
+const useStyles = makeStyles(() => ({
+  title: {
+    color: '#7f7f7f',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 16,
   },
-  error: {
-    border: '1px solid red',
-    borderRadius: 25,
-    padding: 15,
+  titleAbout: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    margin: '40px 0 20px',
   },
-  input: {
-    width: '100%',
+  item: {
+    padding: 20,
   },
-  container: {
-    [theme.breakpoints.down(600)]: {
-      alignItems: 'center',
-      flexDirection: 'column',
-      justifyContent: 'center',
-    },
+  margin: {
+    margin: '20px 0',
+  },
+  uncontract: {
+    marginLeft: 20,
   },
 }));
 

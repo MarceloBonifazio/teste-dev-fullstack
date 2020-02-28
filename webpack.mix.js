@@ -12,3 +12,5 @@ const mix = require('laravel-mix');
  */
 
 mix.react('src/index.js', 'public/js');
+
+mix.react('src/item.js', 'public/js');
