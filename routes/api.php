@@ -20,24 +20,24 @@ Route::get('/cards', function () {
 })->middleware("cors");
 
 Route::put('/card/{id}/active', function ($id) {
-    $card = new CardResource(Card::findOrFail((int)$id));
+    $card = Card::findOrFail((int)$id);
     $card->status = 'active';
     $card->save();
-    return $card;
+    return new CardResource($card);
 })->middleware("cors");
 
 Route::put('/card/{id}/deactive', function ($id) {
-    $card = new CardResource(Card::findOrFail((int)$id));
+    $card = Card::findOrFail((int)$id);
     $card->status = 'deactive';
     $card->save();
-    return $card;
+    return new CardResource($card);
 })->middleware("cors");
 
 Route::put('/card/{id}/hire', function ($id) {
-    $card = new CardResource(Card::findOrFail((int)$id));
-    $card->status = 'hire';
+    $card = Card::findOrFail((int)$id);
+    $card->status = 'active';
     $card->save();
-    return $card;
+    return new CardResource($card);
 })->middleware("cors");
 
 /* Route::get('/info', function () {

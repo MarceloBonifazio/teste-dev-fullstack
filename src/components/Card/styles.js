@@ -17,6 +17,7 @@ const useStyles = makeStyles(() => ({
     textTransform: 'uppercase',
   },
   infoItemStyle: {
+    cursor: 'pointer',
     fontSize: 16,
     fontWeight: 'bold',
     minHeight: 50,

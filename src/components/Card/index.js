@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -23,7 +23,8 @@ import {
 } from '../../svg';
 
 const MyCard = ({
-  item: { title, color: backgroundColor, type, icon, amount, status },
+  item: { title, color: backgroundColor, type, icon, amount, status, id },
+  action,
 }) => {
   const classes = useStyles();
 
@@ -53,8 +54,13 @@ const MyCard = ({
   };
 
   const buttonMap = {
-    active: (
-      <Button variant="contained" color="primary" className={classes.button}>
+    deactive: (
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        onClick={() => action('active', id)}
+      >
         Ativar
       </Button>
     ),
@@ -63,18 +69,22 @@ const MyCard = ({
         variant="contained"
         color="primary"
         className={classes.button}
+        onClick={() => action('hire', id)}
       >
         Contratar
       </StyledButton>
     ),
-    deactive: (
-      <Button variant="contained" color="secondary" className={classes.button}>
+    active: (
+      <Button
+        variant="contained"
+        color="secondary"
+        className={classes.button}
+        onClick={() => action('deactive', id)}
+      >
         Desativar
       </Button>
     ),
   };
-
-  console.log(amount);
 
   return (
     <Card className={classes.root} elevation={2}>
@@ -113,4 +123,4 @@ const MyCard = ({
   );
 };
 
-export default MyCard;
+export default memo(MyCard);

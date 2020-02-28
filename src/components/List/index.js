@@ -18,17 +18,19 @@ const List = () => {
     data: [],
     error: false,
     loading: true,
+    putError: false,
+    putLoading: true,
     person: '',
     fieldError: false,
   });
 
   useEffect(() => {
     async function fetchApi() {
-      const baseUrl = 'http://localhost:8000/api/cards';
+      const baseUrl = 'http://localhost:8000';
       try {
         const {
           data: { data },
-        } = await axios.get(baseUrl);
+        } = await axios.get(`${baseUrl}/api/cards`);
         setState({ ...state, data, loading: false });
       } catch (err) {
         setState({ ...state, error: true, loading: false });
@@ -37,6 +39,20 @@ const List = () => {
     fetchApi();
     // eslint-disable-next-line
   }, []);
+
+  const action = async (type, id) => {
+    setState({ ...state, putLoading: true });
+    const baseUrl = 'http://localhost:8000';
+    try {
+      const {
+        data: { data },
+      } = await axios.put(`${baseUrl}/api/card/${id}/${type}`);
+      console.log(data, type, id);
+      // setState({ ...state, data, putLoading: false });
+    } catch (err) {
+      setState({ ...state, putError: true, putLoading: false });
+    }
+  };
 
   if (state.loading) {
     return (
@@ -60,7 +76,7 @@ const List = () => {
       <Grid className={styles.container} container spacing={1}>
         {state.data.map(item => (
           <Grid item xs={12} sm={4} md={3} key={uuid()}>
-            <Card item={item} />
+            <Card item={item} action={action} />
           </Grid>
         ))}
       </Grid>
