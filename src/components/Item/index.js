@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import Button from '@material-ui/core/Button';
-import CardMedia from '@material-ui/core/CardMedia';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 
 import ArrowBack from '@material-ui/icons/ArrowBack';
 
-import { currency } from '../../utils';
+import currency from '../../utils/currency';
 
 import Dialog from '../Dialog';
 
@@ -156,18 +155,15 @@ const List = () => {
             </Grid>
           )}
           <Grid item sm={2}>
-            <CardMedia
+            <div
               style={{ backgroundColor: backgroundTitleColor[type] }}
               className={core.cardTitleStyle}
             >
               {titleMap[type]}
-            </CardMedia>
-            <CardMedia
-              style={{ backgroundColor }}
-              className={core.cardIconStyle}
-            >
+            </div>
+            <div style={{ backgroundColor }} className={core.cardIconStyle}>
               {iconMap[icon]}
-            </CardMedia>
+            </div>
           </Grid>
           <Grid item sm={5}>
             <Typography variant="h6" component="p">

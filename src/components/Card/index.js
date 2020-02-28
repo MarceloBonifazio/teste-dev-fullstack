@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -7,7 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 
-import { currency } from '../../utils';
+import currency from '../../utils/currency';
 
 import useCore, { StyledButton } from '../../styles';
 import useStyles from './styles';
@@ -135,6 +136,19 @@ const MyCard = ({ item, action }) => {
       </CardActions>
     </Card>
   );
+};
+
+MyCard.propTypes = {
+  item: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
+    amount: PropTypes.number,
+    status: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+  }).isRequired,
+  action: PropTypes.func.isRequired,
 };
 
 export default memo(MyCard);

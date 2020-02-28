@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React from 'react';
 
 export const Icon1 = ({ classes }) => (
   <svg className={classes} version="1.1" width="72.162796" height="65.96299">

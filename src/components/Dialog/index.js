@@ -6,13 +6,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Slide from '@material-ui/core/Slide';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-import { useStyles } from './styles';
+import useStyles from './styles';
 
 const Transition = React.forwardRef((props, ref) => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
   <Slide direction="up" ref={ref} {...props} />
 ));
 
-function CustomDialog({ show, msgLoading }) {
+const CustomDialog = ({ show, msgLoading }) => {
   const styles = useStyles();
 
   return (
@@ -32,15 +33,16 @@ function CustomDialog({ show, msgLoading }) {
       </DialogContent>
     </Dialog>
   );
-}
+};
 
 CustomDialog.propTypes = {
   msgLoading: PropTypes.string,
-  show: PropTypes.bool.isRequired,
+  show: PropTypes.bool,
 };
 
 CustomDialog.defaultProps = {
   msgLoading: 'Aguarde, carregando',
+  show: false,
 };
 
 export default CustomDialog;
