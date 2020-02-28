@@ -80,7 +80,7 @@ const List = () => {
   }
 
   return (
-    <Container className={core.container}>
+    <Container className={core.container} maxWidth="md">
       <Grid container spacing={1}>
         <Dialog show={state.putLoading} />
         {state.putError && (

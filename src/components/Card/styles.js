@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
   root: {
-    minHeight: 330,
+    minHeight: 350,
   },
   infoItemStyle: {
     cursor: 'pointer',
@@ -13,6 +13,7 @@ const useStyles = makeStyles(() => ({
   infoAmountStyle: {
     fontSize: 12,
     marginTop: 16,
+    minHeight: 34,
   },
   cardActionsStyle: {
     display: 'block',

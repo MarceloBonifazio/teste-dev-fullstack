@@ -35,3 +35,7 @@ $path> yarn install | Instala dependencias js
 $path> yarn run dev | Gera os assets js e css
 $path> php artisan serve 
 ```
+
+Acessar o sistema localmente em http://localhost:8000
+
+<img src="https://media.giphy.com/media/IdUWuylD5ntNkzPmXK/giphy.gif">
