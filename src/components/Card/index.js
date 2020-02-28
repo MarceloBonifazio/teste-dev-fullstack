@@ -1,50 +1,116 @@
 import React from 'react';
 
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import EventSeat from '@material-ui/icons/EventSeat';
 
-import useStyles from './styles';
+import { currency } from '../../utils';
 
-export default function App() {
+import useStyles, { StyledButton } from './styles';
+
+import {
+  Icon1,
+  Icon2,
+  Icon3,
+  Icon4,
+  Icon5,
+  Icon6,
+  Icon7,
+  Icon8,
+} from '../../svg';
+
+const MyCard = ({
+  item: { title, color: backgroundColor, type, icon, amount, status },
+}) => {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const backgroundTitleColor = {
+    performance: '#4472c4',
+    engagement: '#7030a0',
+    culture: '#548235',
+    relations: '#c55a11',
   };
 
-  return (
-    <Card className={classes.root}>
-      <CardMedia
-        children="Performance"
-        className={classes.cardTitleStyle}
-      />
-      <CardMedia
-        children={<EventSeat style={{ fontSize: 80, color: 'white' }} />}
-        className={classes.cardIconStyle}
-      />
-      <CardContent>
-        <Typography variant="h6" component="p">
-          Checkin & Checkout
-        </Typography>
-        <Typography variant="body2">
-          + X R$ por colaborador por mês
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button
+  const iconMap = {
+    icon1: <Icon1 classes={classes.iconColor} />,
+    icon2: <Icon2 classes={classes.iconColor} />,
+    icon3: <Icon3 classes={classes.iconColor} />,
+    icon4: <Icon4 classes={classes.iconColor} />,
+    icon5: <Icon5 classes={classes.iconColor} />,
+    icon6: <Icon6 classes={classes.iconColor} />,
+    icon7: <Icon7 classes={classes.iconColor} />,
+    icon8: <Icon8 classes={classes.iconColor} />,
+  };
+
+  const titleMap = {
+    performance: 'Performance',
+    engagement: 'Engajamento',
+    culture: 'Cultura',
+    relations: 'Relações',
+  };
+
+  const buttonMap = {
+    active: (
+      <Button variant="contained" color="primary" className={classes.button}>
+        Ativar
+      </Button>
+    ),
+    hire: (
+      <StyledButton
         variant="contained"
         color="primary"
         className={classes.button}
       >
-        Send
+        Contratar
+      </StyledButton>
+    ),
+    deactive: (
+      <Button variant="contained" color="secondary" className={classes.button}>
+        Desativar
       </Button>
-        </CardActions>
+    ),
+  };
+
+  console.log(amount);
+
+  return (
+    <Card className={classes.root} elevation={2}>
+      <CardMedia
+        style={{ backgroundColor: backgroundTitleColor[type] }}
+        className={classes.cardTitleStyle}
+      >
+        {titleMap[type]}
+      </CardMedia>
+      <CardMedia style={{ backgroundColor }} className={classes.cardIconStyle}>
+        {iconMap[icon]}
+      </CardMedia>
+      <CardContent>
+        <Typography
+          align="center"
+          variant="h6"
+          component="p"
+          className={classes.infoItemStyle}
+        >
+          {title}
+        </Typography>
+        <Typography
+          align="center"
+          variant="body2"
+          className={classes.infoAmountStyle}
+        >
+          {amount !== null
+            ? `+ ${currency(amount)} por colaborador por mês`
+            : 'Gratuito'}
+        </Typography>
+      </CardContent>
+      <CardActions className={classes.cardActionsStyle}>
+        {buttonMap[status]}
+      </CardActions>
     </Card>
   );
-}
+};
+
+export default MyCard;

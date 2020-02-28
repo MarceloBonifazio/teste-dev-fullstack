@@ -11,7 +11,7 @@ import Card from '../Card';
 
 import useStyles from './styles';
 
-const App = () => {
+const List = () => {
   const styles = useStyles();
 
   const [state, setState] = useState({
@@ -24,16 +24,11 @@ const App = () => {
 
   useEffect(() => {
     async function fetchApi() {
-      const baseUrl = '/api/cards';
+      const baseUrl = 'http://localhost:8000/api/cards';
       try {
         const {
-          data: { results: data },
+          data: { data },
         } = await axios.get(baseUrl);
-        data
-          .sort((prev, next) => prev.name.localeCompare(next.name))
-          .forEach(el => {
-            el.id = uuid();
-          });
         setState({ ...state, data, loading: false });
       } catch (err) {
         setState({ ...state, error: true, loading: false });
@@ -43,30 +38,12 @@ const App = () => {
     // eslint-disable-next-line
   }, []);
 
-  const removeItem = id => {
-    if (!id) {
-      setState({ ...state, fieldError: 'Escolha um item para excluir' });
-      return;
-    }
-    setState({
-      ...state,
-      person: '',
-      data: state.data.filter(item => item.id !== id),
-    });
-  };
-
-  const handleSelect = field => event => {
-    setState({ ...state, [field]: event.target.value, fieldError: false });
-  };
-
   if (state.loading) {
     return (
-      <>
-        <div>
-          Carregando...
-          <LinearProgress />
-        </div>
-      </>
+      <Container className={styles.root}>
+        Carregando...
+        <LinearProgress />
+      </Container>
     );
   }
 
@@ -80,10 +57,10 @@ const App = () => {
 
   return (
     <Container className={styles.root}>
-      <Grid className={styles.container} container spacing={2}>
+      <Grid className={styles.container} container spacing={1}>
         {state.data.map(item => (
-          <Grid item xs={12} sm={3}>
-            <Card items={item} />
+          <Grid item xs={12} sm={4} md={3} key={uuid()}>
+            <Card item={item} />
           </Grid>
         ))}
       </Grid>
@@ -91,4 +68,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default List;

@@ -1,21 +1,63 @@
-import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
   root: {
-    maxWidth: 200,
+    minHeight: 330,
   },
   cardIconStyle: {
-    backgroundColor: 'blue',
+    padding: 20,
     textAlign: 'center',
-    padding: 20
+    minHeight: 80,
   },
   cardTitleStyle: {
-    backgroundColor: 'green',
-    textAlign: 'center',
-    padding: 10,
     color: 'white',
+    padding: 10,
+    textAlign: 'center',
     textTransform: 'uppercase',
   },
+  infoItemStyle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    minHeight: 50,
+  },
+  infoAmountStyle: {
+    fontSize: 12,
+    marginTop: 16,
+  },
+  cardActionsStyle: {
+    display: 'block',
+    textAlign: 'center',
+  },
+  iconColor: {
+    fill: 'white',
+  },
+  button: {
+    textTransform: 'capitalize',
+  },
 }));
+
+export const StyledButton = withStyles({
+  root: {
+    backgroundColor: '#92d050',
+    border: '1px solid',
+    borderColor: '#92d050',
+    boxShadow: 'none',
+    fontSize: 16,
+    lineHeight: 1.5,
+    padding: '6px 12px',
+    textTransform: 'none',
+    '&:hover': {
+      backgroundColor: '#79bb32',
+      borderColor: '#abdb78',
+      boxShadow: 'none',
+    },
+    '&:active': {
+      backgroundColor: '#abdb78',
+      borderColor: '#92d050',
+      boxShadow: 'none',
+    },
+  },
+})(Button);
 
 export default useStyles;
