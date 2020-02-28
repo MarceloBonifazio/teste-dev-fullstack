@@ -6,9 +6,9 @@
 
 Pré Requisitos:
 
-php v7.4
-node v10.16.3
-mongodb v3.6.3
+- php v7.4
+- node v10.16.3
+- mongodb v3.6.3
 
 ```bash
 $ git clone git@github.com:MarceloBonifazio/teste-dev-fullstack.git <path>
@@ -19,7 +19,6 @@ $path> php artisan key:generate
 
 Criar .env ou copiar .env.exemple com as configurações do banco, exp:
 
-.env
 ```
 DB_CONNECTION=mongodb
 MONGO_DB_HOST=127.0.0.1
