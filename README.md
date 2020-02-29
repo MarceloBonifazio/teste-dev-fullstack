@@ -1,7 +1,5 @@
 <p align="center">
-  <img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="200">
-  <img src="https://www.xpand-it.com/wp-content/uploads/2018/01/React_logo_wordmark.png" width="200">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/MongoDB_Logo.svg/1200px-MongoDB_Logo.svg.png" width="200">
+  <img src=https://github.com/MarceloBonifazio/teste-dev-fullstack/blob/master/repo_files/stack.png">
 </p>
 
 Pré Requisitos:
@@ -38,4 +36,4 @@ $path> php artisan serve
 
 Acessar o sistema localmente em http://localhost:8000
 
-<img src="https://media.giphy.com/media/IdUWuylD5ntNkzPmXK/giphy.gif">
+<img src="https://github.com/MarceloBonifazio/teste-dev-fullstack/blob/master/repo_files/exp.gif">
