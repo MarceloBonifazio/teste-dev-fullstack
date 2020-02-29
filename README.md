@@ -1,10 +1,10 @@
 <p align="center">
-  <img src=https://github.com/MarceloBonifazio/teste-dev-fullstack/blob/master/repo_files/stack.png">
+  <img src="https://github.com/MarceloBonifazio/teste-dev-fullstack/blob/master/repo_files/stack.png">
 </p>
 
 Pré Requisitos:
 
-- php v7.4
+- php v7.4.3
 - node v10.16.3
 - mongodb v3.6.3
 
