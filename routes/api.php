@@ -16,36 +16,43 @@ use App\Http\Resources\Card as CardResource;
 */
 
 Route::get('/cards', function () {
-    return CardResource::collection(Card::paginate(10));
+    return CardResource::collection(Card::paginate(8));
 })->middleware("cors");
 
-Route::put('/card/{id}/active', function ($id) {
-    $card = Card::findOrFail((int)$id);
-    $card->status = 'active';
-    $card->save();
-    return new CardResource($card);
+Route::prefix('card')->group(function () {
+    Route::get('{id}', function ($id) {
+        return new CardResource(Card::findOrFail((int)$id));
+    });
+
+    Route::put('{id}/active', function ($id) {
+        $card = Card::findOrFail((int)$id);
+        $card->status = 'active';
+        $card->save();
+        return new CardResource($card);
+    });
+
+    Route::put('{id}/deactive', function ($id) {
+        $card = Card::findOrFail((int)$id);
+        $card->status = 'deactive';
+        $card->save();
+        return new CardResource($card);
+    });
+    
+    Route::put('{id}/hire', function ($id) {
+        $card = Card::findOrFail((int)$id);
+        $card->status = 'active';
+        $card->save();
+        return new CardResource($card);
+    });
+    
+    Route::put('{id}/uncontract', function ($id) {
+        $card = Card::findOrFail((int)$id);
+        $card->status = 'hire';
+        $card->save();
+        return new CardResource($card);
+    });
 });
 
-Route::put('/card/{id}/deactive', function ($id) {
-    $card = Card::findOrFail((int)$id);
-    $card->status = 'deactive';
-    $card->save();
-    return new CardResource($card);
-});
-
-Route::put('/card/{id}/hire', function ($id) {
-    $card = Card::findOrFail((int)$id);
-    $card->status = 'active';
-    $card->save();
-    return new CardResource($card);
-});
-
-Route::put('/card/{id}/uncontract', function ($id) {
-    $card = Card::findOrFail((int)$id);
-    $card->status = 'hire';
-    $card->save();
-    return new CardResource($card);
-});
 
 /* Route::get('/info', function () {
     return phpinfo();

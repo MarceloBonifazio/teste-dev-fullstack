@@ -50,15 +50,18 @@ const List = () => {
   } = state.data;
 
   useEffect(() => {
-    async function fetchLS() {
-      const data = JSON.parse(localStorage.getItem('item'));
-      if (!data) {
+    const itemId = window.location.pathname.replace(/^\D+/g, '');
+    async function fetchApi() {
+      try {
+        const {
+          data: { data },
+        } = await axios.get(`/api/card/${itemId}`);
+        setState({ ...state, data, loading: false });
+      } catch (err) {
         window.location.href = '/';
       }
-      setState({ data });
     }
-
-    fetchLS();
+    fetchApi();
     // eslint-disable-next-line
   }, []);
 
@@ -133,7 +136,6 @@ const List = () => {
   };
 
   const back = () => {
-    localStorage.removeItem('item');
     window.location.href = '/';
   };
 

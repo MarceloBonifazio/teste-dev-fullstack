@@ -96,8 +96,7 @@ const MyCard = ({ item, action }) => {
   };
 
   const openItem = () => {
-    localStorage.setItem('item', JSON.stringify(item));
-    window.location.href = '/item';
+    window.location.href = `/item/${id}`;
   };
 
   return (

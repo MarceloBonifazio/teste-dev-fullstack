@@ -15,6 +15,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/item', function () {
+Route::get('/item/{id}', function ($id) {
     return view('item');
 });
