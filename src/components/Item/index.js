@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
@@ -34,8 +35,10 @@ const List = () => {
 
   const [state, setState] = useState({
     data: {},
-    loading: false,
     error: false,
+    loading: false,
+    putError: false,
+    putLoading: false,
   });
 
   const {
@@ -58,7 +61,14 @@ const List = () => {
         } = await axios.get(`/api/card/${itemId}`);
         setState({ ...state, data, loading: false });
       } catch (err) {
-        window.location.href = '/';
+        setState({
+          ...state,
+          error: true,
+          loading: false,
+        });
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 3000);
       }
     }
     fetchApi();
@@ -91,14 +101,18 @@ const List = () => {
   };
 
   const action = async typeStatus => {
-    setState({ ...state, error: false, loading: true });
+    setState({ ...state, putError: false, putLoading: true });
     try {
       const {
         data: { data },
       } = await axios.put(`/api/card/${id}/${typeStatus}`);
-      setState({ ...state, data, loading: false });
+      setState({ ...state, data, putLoading: false });
     } catch (err) {
-      setState({ ...state, error: true, loading: false });
+      setState({
+        ...state,
+        putError: true,
+        putLoading: false,
+      });
     }
   };
 
@@ -139,6 +153,25 @@ const List = () => {
     window.location.href = '/';
   };
 
+  if (state.loading) {
+    return (
+      <Container className={core.container}>
+        Carregando...
+        <LinearProgress />
+      </Container>
+    );
+  }
+
+  if (state.error) {
+    return (
+      <Container className={core.container}>
+        <Paper className={core.error}>
+          Erro no servidor ou item não encontrado
+        </Paper>
+      </Container>
+    );
+  }
+
   return (
     <Container className={core.container}>
       <Dialog show={state.loading} />
@@ -151,7 +184,7 @@ const List = () => {
           Contratar módulo
         </Typography>
         <Grid container spacing={3}>
-          {state.error && (
+          {state.putError && (
             <Grid item xs={12}>
               <Paper className={core.error}>Erro ao salvar dados</Paper>
             </Grid>
