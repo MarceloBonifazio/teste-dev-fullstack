@@ -20,10 +20,10 @@ use Illuminate\Support\Str;
 $factory->define(Card::class, function (Faker $faker) {
     return [
         'about' => $faker->text($maxNbChars = 1000),
-        'amount' => rand(0,10) ? $faker->randomFloat(2, 10, 100000) : null,
+        'amount' => rand(0,10) ? $faker->randomFloat(2, 10, 10000) : null,
         'color' => $faker->hexcolor,
-        'icon' => $faker->text($maxNbChars = 20),
-        'id' => $faker->randomNumber(1000),
+        'icon' => 'icon' . rand(1, 8),
+        'id' => $faker->randomNumber(9),
         'status' => $faker->randomElement(['hire','active','deactive']),
         'title' => $faker->text($maxNbChars = 20),
         'type' => $faker->randomElement(['performance', 'engagement', 'culture', 'relations']),

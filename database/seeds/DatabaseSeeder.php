@@ -111,18 +111,7 @@ class DatabaseSeeder extends Seeder
                 'amount' => $faker->randomFloat(2, 10, 1000),
             ]
         );
-        /* Card::create(
-			[
-				'about' => $faker->text($maxNbChars = 1000),
-                'color' => '#222a35',
-                'icon' => 'icon1',
-                'status' => $faker->randomElement(['hire','active','deactive']),
-                'title' => 'Checkin & Checkout',
-                'type' => $faker->randomElement(['performance', 'engagement', 'culture', 'relations']),
-                'amount' => rand(0,10) ? $faker->randomFloat(2, 10, 1000) : null,
-            ]
-        );
-        factory(Card::class, 10)->create(); */
-        // $this->call(UsersTableSeeder::class);
+
+        factory(Card::class, 100)->create();
     }
 }

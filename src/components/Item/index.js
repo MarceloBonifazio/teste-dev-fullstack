@@ -12,22 +12,12 @@ import Typography from '@material-ui/core/Typography';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 
 import currency from '../../utils/currency';
+import { backgroundTitleColor, iconMap, titleMap } from '../../utils/map';
 
 import Dialog from '../Dialog';
 
 import useStyles from './styles';
 import useCore, { StyledButton } from '../../styles';
-
-import {
-  Icon1,
-  Icon2,
-  Icon3,
-  Icon4,
-  Icon5,
-  Icon6,
-  Icon7,
-  Icon8,
-} from '../../svg';
 
 const List = () => {
   const core = useCore();
@@ -74,31 +64,6 @@ const List = () => {
     fetchApi();
     // eslint-disable-next-line
   }, []);
-
-  const backgroundTitleColor = {
-    performance: '#4472c4',
-    engagement: '#7030a0',
-    culture: '#548235',
-    relations: '#c55a11',
-  };
-
-  const iconMap = {
-    icon1: <Icon1 classes={core.iconColor} />,
-    icon2: <Icon2 classes={core.iconColor} />,
-    icon3: <Icon3 classes={core.iconColor} />,
-    icon4: <Icon4 classes={core.iconColor} />,
-    icon5: <Icon5 classes={core.iconColor} />,
-    icon6: <Icon6 classes={core.iconColor} />,
-    icon7: <Icon7 classes={core.iconColor} />,
-    icon8: <Icon8 classes={core.iconColor} />,
-  };
-
-  const titleMap = {
-    performance: 'Performance',
-    engagement: 'Engajamento',
-    culture: 'Cultura',
-    relations: 'Relações',
-  };
 
   const action = async typeStatus => {
     setState({ ...state, putError: false, putLoading: true });
@@ -174,7 +139,7 @@ const List = () => {
 
   return (
     <Container className={core.container}>
-      <Dialog show={state.loading} />
+      <Dialog show={state.putLoading} />
       <IconButton onClick={back}>
         <ArrowBack />
         <Typography variant="h5">Voltar</Typography>

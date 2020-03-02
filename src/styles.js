@@ -34,9 +34,6 @@ const useCore = makeStyles(() => ({
     fontSize: 12,
     marginTop: 16,
   },
-  iconColor: {
-    fill: 'white',
-  },
 }));
 
 export const StyledButton = withStyles({

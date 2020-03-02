@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 
 import Card from '../Card';
 import Dialog from '../Dialog';
+import Pagination from '../Pagination';
 
 import useCore from '../../styles';
 
@@ -19,6 +20,7 @@ const List = () => {
     data: [],
     error: false,
     loading: true,
+    meta: {},
     putError: false,
     putLoading: false,
   });
@@ -27,9 +29,9 @@ const List = () => {
     async function fetchApi() {
       try {
         const {
-          data: { data },
+          data: { data, meta },
         } = await axios.get('/api/cards');
-        setState({ ...state, data, loading: false });
+        setState({ ...state, data, meta, loading: false });
       } catch (err) {
         setState({ ...state, error: true, loading: false });
       }
@@ -38,13 +40,7 @@ const List = () => {
     // eslint-disable-next-line
   }, []);
 
-  const changeData = (data, item, id) => {
-    if (item.id === id) {
-      return data;
-    } else {
-      return item;
-    }
-  };
+  const changeData = (data, item, id) => (item.id === id ? data : item);
 
   const action = async (type, id) => {
     setState({ ...state, putError: false, putLoading: true });
@@ -59,6 +55,18 @@ const List = () => {
       });
     } catch (err) {
       setState({ ...state, putError: true, putLoading: false });
+    }
+  };
+
+  const changePage = async page => {
+    setState({ ...state, loading: true });
+    try {
+      const {
+        data: { data, meta },
+      } = await axios.get(`/api/cards?page=${page}`);
+      setState({ ...state, data, meta, loading: false });
+    } catch (err) {
+      setState({ ...state, error: true, loading: false });
     }
   };
 
@@ -88,6 +96,9 @@ const List = () => {
             <Paper className={core.error}>Erro ao salvar dados</Paper>
           </Grid>
         )}
+        <Grid item xs={12}>
+          <Pagination data={state.meta} changePage={changePage} />
+        </Grid>
         {state.data.map(item => (
           <Grid item xs={12} sm={4} md={3} key={uuid()}>
             <Card item={item} action={action} />

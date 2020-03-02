@@ -1,8 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-export const Icon1 = ({ classes }) => (
-  <svg className={classes} version="1.1" width="72.162796" height="65.96299">
+export const Icon1 = () => (
+  <svg
+    style={{ fill: 'white' }}
+    version="1.1"
+    width="72.162796"
+    height="65.96299"
+  >
     <g transform="matrix(1.3333333,0,0,-1.3333333,-381.85367,556.38883)">
       <g clipPath="url(#clipPath316)">
         <g transform="scale(0.6352359,-0.6342595)">
@@ -20,8 +25,13 @@ export const Icon1 = ({ classes }) => (
   </svg>
 );
 
-export const Icon2 = ({ classes }) => (
-  <svg className={classes} version="1.1" width="60.862606" height="60.888912">
+export const Icon2 = () => (
+  <svg
+    style={{ fill: 'white' }}
+    version="1.1"
+    width="60.862606"
+    height="60.888912"
+  >
     <g transform="matrix(0.84531398,0,0,0.84567931,-527.74389,553.85141)">
       <path d="m 636.317,-642.919 h 48 v 48 h -48 z" />
     </g>
@@ -35,8 +45,13 @@ export const Icon2 = ({ classes }) => (
   </svg>
 );
 
-export const Icon3 = ({ classes }) => (
-  <svg className={classes} version="1.1" width="52.512833" height="67.521164">
+export const Icon3 = () => (
+  <svg
+    style={{ fill: 'white' }}
+    version="1.1"
+    width="52.512833"
+    height="67.521164"
+  >
     <g transform="matrix(0.84698118,0,0,0.84401451,-677.27834,552.60753)">
       <path d="m 799.638,-654.737 h 62 v 80 h -62 z m 6.001,73.999 h 50 v -68 h -50 z" />
     </g>
@@ -75,8 +90,13 @@ export const Icon3 = ({ classes }) => (
   </svg>
 );
 
-export const Icon4 = ({ classes }) => (
-  <svg className={classes} version="1.1" width="72.020752" height="67.231506">
+export const Icon4 = () => (
+  <svg
+    style={{ fill: 'white' }}
+    version="1.1"
+    width="72.020752"
+    height="67.231506"
+  >
     <g transform="matrix(1.3333333,0,0,-1.3333333,-813.84455,556.18079)">
       <g clipPath="url(#clipPath378)">
         <g transform="matrix(0.6339855,0,0,-0.6342595,-6.1e-5,-6.1e-5)">
@@ -89,8 +109,13 @@ export const Icon4 = ({ classes }) => (
   </svg>
 );
 
-export const Icon5 = ({ classes }) => (
-  <svg className={classes} version="1.1" width="57.506714" height="68.111969">
+export const Icon5 = () => (
+  <svg
+    style={{ fill: 'white' }}
+    version="1.1"
+    width="57.506714"
+    height="68.111969"
+  >
     <g transform="matrix(1.3333333,0,0,-1.3333333,-382.37725,281.99348)">
       <g clipPath="url(#clipPath336)">
         <g transform="matrix(0.6339855,0,0,-0.6330109,-3.05e-5,0)">
@@ -113,8 +138,13 @@ export const Icon5 = ({ classes }) => (
   </svg>
 );
 
-export const Icon6 = ({ classes }) => (
-  <svg className={classes} version="1.1" width="89.002968" height="53.257713">
+export const Icon6 = () => (
+  <svg
+    style={{ fill: 'white' }}
+    version="1.1"
+    width="89.002968"
+    height="53.257713"
+  >
     <g transform="matrix(1.3333333,0,0,-1.3333333,-517.03657,271.49859)">
       <g clipPath="url(#clipPath216)">
         <g transform="matrix(0.7690356,0,0,-0.7678536,-3.05e-5,-1.53e-5)">
@@ -162,8 +192,13 @@ export const Icon6 = ({ classes }) => (
   </svg>
 );
 
-export const Icon7 = ({ classes }) => (
-  <svg className={classes} version="1.1" width="45.276814" height="58.19873">
+export const Icon7 = () => (
+  <svg
+    style={{ fill: 'white' }}
+    version="1.1"
+    width="45.276814"
+    height="58.19873"
+  >
     <g transform="matrix(0.73027118,0,0,0.72748412,-680.89433,276.74034)">
       <g transform="translate(932.3856,-300.4074)">
         <path d="m 0,0 v -80 h 40 l 22,22 V 0 Z M 6,-5.999 H 56.001 V -53 H 34 V -74 H 6 Z M 40,-59 H 52.501 L 40,-71.5 Z" />
@@ -172,8 +207,13 @@ export const Icon7 = ({ classes }) => (
   </svg>
 );
 
-export const Icon8 = ({ classes }) => (
-  <svg className={classes} version="1.1" width="51.654148" height="74.231049">
+export const Icon8 = () => (
+  <svg
+    style={{ fill: 'white' }}
+    version="1.1"
+    width="51.654148"
+    height="74.231049"
+  >
     <g transform="matrix(1.3333333,0,0,-1.3333333,-823.30773,283.34384)">
       <g clipPath="url(#clipPath392)">
         <g transform="matrix(0.6352359,0,0,-0.6330109,-6.1e-5,0)">
